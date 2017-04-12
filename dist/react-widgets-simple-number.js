@@ -1,4 +1,4 @@
-/*! (c) 2016 Jason Quense | https://github.com/jquense/react-widgets/blob/master/License.txt */
+/*! (c) 2017 Jason Quense | https://github.com/jquense/react-widgets/blob/master/License.txt */
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -88,11 +88,9 @@
 	};
 
 	function simpleNumber(options) {
-	  var _defaults$options = _extends({}, defaults, options);
-
-	  var decimal = _defaults$options.decimal;
-	  var grouping = _defaults$options.grouping;
-
+	  var _defaults$options = _extends({}, defaults, options),
+	      decimal = _defaults$options.decimal,
+	      grouping = _defaults$options.grouping;
 
 	  var localizer = {
 	    formats: {

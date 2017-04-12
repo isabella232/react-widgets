@@ -51,6 +51,8 @@ let propTypes = {
   suggest:        CustomPropTypes.filter,
   filter:         CustomPropTypes.filter,
 
+  focusOnOpen:    React.PropTypes.bool,
+
   busy:           React.PropTypes.bool,
 
   dropUp:         React.PropTypes.bool,
@@ -129,7 +131,7 @@ var ComboBox = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    let { value, data, valueField, textField } = nextProps
+    let { value, data, valueField, textField, focusOnOpen } = nextProps
 
     var rawIdx = dataIndexOf(data, value, valueField)
       , valueItem = rawIdx === -1 ? nextProps.value : nextProps.data[rawIdx]
@@ -146,12 +148,14 @@ var ComboBox = React.createClass({
 
     this._searchTerm = '';
 
+    focused = idx === -1 && focusOnOpen ?
+      focused !== -1 ? focused : 0 // focus the closest match
+      : idx;
+
     this.setState({
       processedData:  items,
       selectedItem:   items[idx],
-      focusedItem:    items[idx === -1
-        ? focused !== -1 ? focused : 0 // focus the closest match
-        : idx]
+      focusedItem:    items[focused]
     })
   },
 
@@ -445,6 +449,10 @@ var ComboBox = React.createClass({
       data = this.filter(data, searchTerm)
 
     return data
+  },
+
+  getFocusedItem() {
+    return this.state.focusedItem;
   }
 })
 
